@@ -1,3 +1,4 @@
+## Calculate the expression specificity of transcripts across different cancer cell lineages or cancer types
 library(tidyverse)
 args=commandArgs(T)
 
@@ -5,13 +6,13 @@ args=commandArgs(T)
 exp <- data.table::fread(paste0("transcript_", args[1], ".txt"), header = T, data.table = F, check.names = F)
 meta <- data.table::fread("info.ccle-site-type_check_02.txt", header = T, data.table = F, check.names = F)
 
-# Remove primary sites with frequency less than 5
+# Remove primary sites with less than 5 cancer cell lines
 summary <- data.frame(table(meta$Site_Primary))
 abandon <- as.character(summary$Var1[summary$Freq < 5])
 exp <- exp[, !colnames(exp) %in% meta$CCLE_ID[meta$Site_Primary %in% abandon]]
 meta <- meta[!meta$Site_Primary %in% abandon, ]
 
-# Calculate average expression of each primary sites
+# Calculate average expression of each primary site
 expl <- exp %>% 
   pivot_longer(cols = 2:ncol(exp),
                names_to = "Cell_Line",
