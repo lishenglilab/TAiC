@@ -85,7 +85,7 @@ for (i in rownames(auc1)){
         d <- model_data[bootstrap_ids,]
         
         # Estimate the model and save the coefficients
-        fit <- glmnet(scale(d[,1:ncol(d)-1]), as.numeric(d[,ncol(d)]), alpha = best_parameter$alpha, lambda = best_parameter$lambda)
+        fit <- glmnet(d[,1:ncol(d)-1], as.numeric(d[,ncol(d)]), alpha = best_parameter$alpha, lambda = best_parameter$lambda)
         coeff_mtx[i,]  <- as.matrix(coef(fit))
       }
       colnames(coeff_mtx) <- c("Intercept", colnames(rt[,1:ncol(rt)-1]))
