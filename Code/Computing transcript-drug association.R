@@ -1,23 +1,24 @@
+## Compute the associations between transcript expression and drug sensitivity by a Elastic Net Regression model
 library(tidyverse)
 library(caret)
 library(glmnet)
 args=commandArgs(T)
 
-# import expression data
+# Import expression data
 exp <- data.table::fread("CCLE_transcript_0.1.txt", header = T, data.table = F, check.names = F)
 rownames(exp) <- exp[, 1]
 exp <- exp[, -1]
 colnames(exp) <- gsub("_.*", "", colnames(exp))
 
-# import drug sensitivity data
+# Iimport drug sensitivity data
 auc <- read.table(paste0("CTRP_AUC_",args[1],".txt"), header = T, sep = "\t", check.names = F, row.names = 1)
 
-# set identical id of cell lines
+# Set identical id of cell lines
 com_id <- intersect(colnames(exp),colnames(auc))
 exp1 <- exp[, com_id]
 auc1 <- auc[, com_id]
 
-# build result matrix
+# Bbuild result matrix
 feature_score <- as.data.frame(matrix(0,ncol=1,nrow=(nrow(exp1)+1)))
 rownames(feature_score) <- c("Intercept",rownames(exp1))
 
@@ -25,16 +26,16 @@ rownames(feature_score) <- c("Intercept",rownames(exp1))
 for (i in rownames(auc1)){
   print(i)
   
-  # import spearman correlation results
+  # Import spearman correlation results
   genecor <- data.table::fread(paste0("Cor_transcript-",i,".txt"), header =T , data.table = F, check.names = F)
   
-  # remove transcript-drug pairs with correlation index lower than 0.2
+  # Remove transcript-drug pairs with correlation index lower than 0.2
   genecor_cor <- subset(genecor, abs(cor) > 0.2 & FDR < 0.05)
   rm(genecor)
   
   if(nrow(genecor_cor) >= 2){
     
-    # process data for drug i
+    # Process data for drug i
     index <- rownames(exp1) %in% genecor_cor$Gene_2
     expi <- exp1[index,]
     data <- as.data.frame(rbind(expi,auc1))
@@ -103,7 +104,7 @@ for (i in rownames(auc1)){
         sum(x<0)/1000 - sum(x>0)/1000}
     })
     
-    # generate results
+    # Generate results
     feature <- data.frame(score)
     colnames(feature) <- i
     row <- nrow(feature_score) - nrow(feature)
