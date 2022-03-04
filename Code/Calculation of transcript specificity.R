@@ -22,7 +22,7 @@ expl_mean <- expl %>%
   group_by(Transcript_Id, Site_Primary) %>% 
   summarise(Mean = mean(TPM))
   
-# Retain transcripts with at least 0.1 average TPM in one primary sites
+# Retain transcripts with at least 0.1 average TPM in one primary site
 expl_meanw <- expl_mean %>% 
   pivot_wider(names_from = Site_Primary, values_from = Mean )
 expl_meanw <- expl_meanw[apply(expl_meanw[, 2:ncol(expl_meanw)], 1, function(x) sum(x >= 0.1) >= 1 ),]
