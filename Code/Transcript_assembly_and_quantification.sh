@@ -7,6 +7,7 @@
 sample=$1
 
 ## STAR 2pass RNA-seq read alignment
+
 star='/mnt/data132Tp3/public/201212/softwares/STAR/bin/Linux_x86_64/STAR'
 gdir='/mnt/data132Tp3/public/201212/ref/star_gencodev35_grch38.p13_index'
 file_gtf='/mnt/data132Tp3/public/201212/ref/gencode.v35.annotation.gtf'
@@ -23,6 +24,7 @@ ${star} --twopassMode Basic --twopass1readsN -1 --runThreadN 5 --genomeDir ${gdi
 
 
 ## Stringtie reference-based transcript assembly
+
 stringtie='/mnt/data132Tp3/public/201212/softwares/stringtie-2.1.4.Linux_x86_64/stringtie'
 dir_align='/mnt/data132Tp3/public/201212/star_alignments'
 file_bam=${dir_align}'/'${sample}'/'${sample}'_alignmentAligned.sortedByCoord.out.bam'
@@ -33,6 +35,7 @@ out_gtf=${dir_stringtie}'/'${sample}'/'${sample}'_stringtie.gtf'
 ${stringtie} ${file_bam} -p 5 -o ${out_gtf} -G ${ref_gtf}
 
 ## merge transcript assembly from individual samples
+
 stringtie='/mnt/data132Tp3/public/201212/softwares/stringtie-2.1.4.Linux_x86_64/stringtie'
 gtf_files='/mnt/data132Tp3/public/201212/data/gtf_files.txt' # list of transcript assembly of all samples
 ref_gtf='/mnt/data132Tp3/public/201212/ref/gencode.v35.annotation.gtf'
@@ -40,6 +43,8 @@ out_gtf='/mnt/data132Tp3/public/201212/data/CCLE_1017_merged.gtf'
 ${stringtie} --merge -p 10 -o ${out_gtf} -G ${ref_gtf} ${gtf_files}
 
 ## Stringtie transcript quantification
+## this quantification workflow is for both CCLE and TCGA samples
+
 stringtie='/mnt/data132Tp3/public/201212/softwares/stringtie-2.1.4.Linux_x86_64/stringtie'
 dir_align='/mnt/data132Tp3/public/201212/star_alignments'
 file_bam=${dir_align}/${sample}/${sample}'_alignmentAligned.sortedByCoord.out.bam'
