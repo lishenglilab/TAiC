@@ -14,4 +14,4 @@ nohup /home/weihu/softwares/CPC2_standalone-1.0.1/bin/CPC2.py -i /home/weihu/RBP
 nohup /home/weihu/.local/bin/cpat.py -x Human_Hexamer.tsv -d Human_logitModel.RData --top-orf=5 -g /home/weihu/RBP_transcript_drug_project/data/fa/CCLE_1017_merged_novel_noncoding.fa -o novel_noncoding_transcript_CPAT &
 
 # HMMER
-nohup hmmsearch --domtblout novel_noncoding_transcript_pfam /home/Wei.Hu/Task_pfam_scan/PfamScan/Pfam-A.hmm /home/weihu/RBP_transcript_drug_project/data/fa/CCLE_1017_merged_novel_noncoding.fa
+nohup hmmsearch --domtblout novel_noncoding_transcript_Pfam /home/Wei.Hu/Task_pfam_scan/PfamScan/Pfam-A.hmm /home/weihu/RBP_transcript_drug_project/data/fa/CCLE_1017_merged_novel_noncoding.fa
