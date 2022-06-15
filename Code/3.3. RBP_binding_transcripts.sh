@@ -1,5 +1,5 @@
 #!/bin/bash
-# bedtools version=v2.29.2
+# bedtools version=2.29.2
 
 # overlaps of RBP binding sites and exons of transcripts
 dir="/home/weihu/RBP_transcript_drug_project/4_RBP_regulation/data/eCLIPseq_bed/HepG2_eCLIPseq_bed/"
