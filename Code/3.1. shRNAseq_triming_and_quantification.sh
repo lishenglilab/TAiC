@@ -2,6 +2,7 @@
 # STAR version=2.7.6a
 # Stringtie version=2.1.4
 # Trimmomatic version=0.39
+# genome version gencodev35_grch38.p13
 
 ## Trim 
 trim='/mnt/data132Tp3/public/201212/softwares/Trimmomatic-0.39/trimmomatic-0.39.jar'
