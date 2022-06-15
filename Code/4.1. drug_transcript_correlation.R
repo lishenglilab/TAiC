@@ -1,3 +1,6 @@
+# R version 4.0.2 (2020-06-22)
+# tidyverse version=1.3.1
+
 library(tidyverse)
 args=commandArgs(T)
 
