@@ -7,7 +7,6 @@ genecode_v35 <- import("/home/public/reference/gtf/human/gencode.v35.annotation.
 
 # extract novel and noncoding transcripts
 noncoding_id <- unique(genecode_v35$transcript_id[genecode_v35$transcript_type != "protein_coding"])
-table(noncoding_id %in% ccle$transcript_id) # not all genecode v35 noncoding ids were found
 novel_id <- unique(grep("MSTRG", ccle$transcript_id, value = T))
 ccle_novel_noncoding <- ccle[ccle$transcript_id %in% c(noncoding_id, novel_id)]
 
