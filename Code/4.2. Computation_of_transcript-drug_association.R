@@ -1,3 +1,8 @@
+# R version 4.0.2 (2020-06-22)
+# tidyverse version=1.3.1
+# caret version=6.0-88
+# glmnet version=4.1-2
+
 ## Compute the associations between transcript expression and drug sensitivity by a Elastic Net Regression model
 library(tidyverse)
 library(caret)
