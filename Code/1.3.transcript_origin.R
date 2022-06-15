@@ -5,20 +5,25 @@
 library(tidyverse)
 library(rtracklayer)
 
-merged = import("./data/gtf/CCLE_1017_merged_filtered_0.1.gtf")
-index = which(merged$type == "transcript")
- merged.info=data.frame(Gene_Id = merged$gene_id[index],
-                       Transcript_Id = merged$transcript_id[index],
-                       Gene_Name=merged$gene_name[index],
-                       Ref_Gene_Id=merged$ref_gene_id[index])
+# import ccle gtf
+merged = import("./data/gtf/CCLE_1017_merged_filtered.gtf")
+index = which(merged$type == "transcript") # extract transcript index
+# extract transcript information
+merged.info=data.frame(Gene_Id = merged$gene_id[index],
+                      Transcript_Id = merged$transcript_id[index],
+                      Gene_Name=merged$gene_name[index],
+                      Ref_Gene_Id=merged$ref_gene_id[index])
 
+# import gencode.v35 gtf
 gencode.v35 = import("/home/public/reference/gtf/human/gencode.v35.annotation.gtf")
-index = which(gencode.v35$type == "transcript") 
+index = which(gencode.v35$type == "transcript") # extract transcript index
+# extract transcript information
 tmp=data.frame(Transcript_Id = gencode.v35$transcript_id[index],
                Gene_Type=gencode.v35$gene_type[index])
 
 merged.info=left_join(merged.info,tmp,by=c("Transcript_Id"))
 
+# set gene types
 match=data.frame(Gene_Type = c("IG_C_gene","IG_D_gene","IG_J_pseudogene","IG_V_gene","lncRNA","misc_RNA","Mt_tRNA","processed_pseudogene",
                                "rRNA","scaRNA","snoRNA","sRNA","TR_C_gene","TR_J_gene","TR_V_gene","transcribed_processed_pseudogene",
                                "transcribed_unprocessed_pseudogene","Unknown","vault_RNA","IG_C_pseudogene","IG_J_gene","IG_pseudogene",
@@ -34,12 +39,9 @@ Classified_type=c("protein_coding","protein_coding","pseudogene","protein_coding
                   "pseudogene","pseudogene","pseudogene","pseudogene","pseudogene"
 ))
 
-setdiff(unique(merged.info$Gene_Type),match$Gene_Type)
-setdiff(match$Gene_Type, unique(merged.info$Gene_Type))
-
 merged.info=left_join(merged.info,match,by="Gene_Type")
 
-
+# classify new genes
 merged.info$Classified_type <- factor(merged.info$Classified_type,levels = c("protein_coding",
                                                                              "lncRNA",
                                                                              "ncRNA",
@@ -55,11 +57,7 @@ merged_gene_type <- merged.info %>%
 merged.info <- left_join(merged.info, merged_gene_type, by = "Gene_Id")
 
 merged.info_ENSG <- merged.info[grepl("ENSG", merged.info$Gene_Id),]
-identical(merged.info_ENSG$Classified_type, merged.info_ENSG$Gene_Origin)
-
 merged.info_ENST <- merged.info[grepl("ENST", merged.info$Transcript_Id),]
-identical(merged.info_ENST$Classified_type, merged.info_ENST$Transcript_Origin)
-
 merged.info$Gene_Origin[is.na(merged.info$Gene_Origin)] = "intergenic"
 
 merged.info$Transcript_Origin <- merged.info$Classified_type
