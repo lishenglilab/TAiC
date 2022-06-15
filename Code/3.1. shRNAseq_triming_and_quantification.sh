@@ -34,7 +34,7 @@ nohup bash Trim.sh &
 ## STAR 2pass RNA-seq read alignment
 star='/mnt/data132Tp3/public/201212/softwares/STAR/bin/Linux_x86_64/STAR'
 gdir='/mnt/data132Tp3/public/201212/ref/star_gencodev35_grch38.p13_index'
-file_gtf='/mnt/data132Tp3/public/201212/ref/gencode.v35.annotation.gtf'
+file_gtf='/mnt/data132Tp3/public/201212/K562/script_K562/CCLE_1017_merged.gtf'
 dir_fq='/mnt/data132Tp3/public/201212/K562/Trim_results' 
 dir_alignment='/mnt/data132Tp3/public/201212/K562/K562_star_alignments'
 
