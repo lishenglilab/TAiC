@@ -1,3 +1,5 @@
+## Get RBP regulated transcript from RBP KD-RNA-seq data
+
 # R version 4.0.2 (2020-06-22)
 # tidyverse version=1.3.1
 # DESeq2 version=1.3.1
