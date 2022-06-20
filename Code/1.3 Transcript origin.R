@@ -1,3 +1,5 @@
+## retrieve the genomic positions and gene types of transcripts
+
 # R version 4.0.2 (2020-06-22)
 # tidyverse version=1.3.1
 # rtracklayer version=1.5.0
@@ -5,7 +7,7 @@
 library(tidyverse)
 library(rtracklayer)
 
-# import ccle gtf
+# import CCLE GTF file
 merged = import("./data/gtf/CCLE_1017_merged_filtered.gtf")
 index = which(merged$type == "transcript") # extract transcript index
 # extract transcript information
@@ -14,7 +16,7 @@ merged.info=data.frame(Gene_Id = merged$gene_id[index],
                       Gene_Name=merged$gene_name[index],
                       Ref_Gene_Id=merged$ref_gene_id[index])
 
-# import gencode.v35 gtf
+# import gencode.v35 GTF file
 gencode.v35 = import("/home/public/reference/gtf/human/gencode.v35.annotation.gtf")
 index = which(gencode.v35$type == "transcript") # extract transcript index
 # extract transcript information
