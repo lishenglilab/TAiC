@@ -1,4 +1,4 @@
-## Prioritize drug-transcript associations by a machine-learning model
+## Prioritize transcript-drug associations by a machine-learning model
 
 # R version 4.0.2 (2020-06-22)
 # tidyverse version=1.3.1
