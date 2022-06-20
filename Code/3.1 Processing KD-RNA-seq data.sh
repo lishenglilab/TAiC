@@ -1,10 +1,12 @@
+## Transcript assembly and quantification of KD-RNA-seq data
+
 #!/bin/bash
 # STAR version=2.7.6a
 # Stringtie version=2.1.4
 # Trimmomatic version=0.39
 # genome version gencodev35_grch38.p13
 
-## Trim 
+## Trim low-quality bases and reads
 trim='/mnt/data132Tp3/public/201212/softwares/Trimmomatic-0.39/trimmomatic-0.39.jar'
 adapter='/mnt/data132Tp3/public/201212/softwares/Trimmomatic-0.39/adapters/PE_adapters.fa'
 dir_wk='/mnt/data132Tp3/public/201212/K562'
