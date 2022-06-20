@@ -1,4 +1,4 @@
-## 
+## Construct preliminary drug-transcript relations from correlationa analysis
 
 # R version 4.0.2 (2020-06-22)
 # tidyverse version=1.3.1
