@@ -1,3 +1,5 @@
+## Get RBP bidning transcripts from RBP eCLIP-seq data
+
 #!/bin/bash
 # bedtools version=2.29.2
 
