@@ -1,3 +1,5 @@
+## Transcript assembly and quantification from RNA-seq data.
+
 #!/bin/bash
 # STAR version=2.7.6a
 # Stringtie version=2.1.4
