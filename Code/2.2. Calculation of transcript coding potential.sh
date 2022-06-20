@@ -1,3 +1,5 @@
+## Calculate the coding potential of novel and noncoidng transcripts
+
 #!/bin/bash
 # gffread version=0.11.8
 # ORFfinder version=0.4.3
@@ -6,7 +8,7 @@
 # HMMER version=3.3
 # genome version gencodev35_grch38.p13
 
-# gffread
+# get sequences of novle and noncoding transcripts
 gffread -w CCLE_1017_merged_novel_noncoding.fa -g /home/public/reference/fa/human/GENCODE_v35_GRCh38.p13_genome.fa /home/weihu/RBP_transcript_drug_project/data/gtf/CCLE_1017_merged_novel_noncoding.gtf
 
 # ORFfinder
