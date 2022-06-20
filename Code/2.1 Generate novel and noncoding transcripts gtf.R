@@ -16,6 +16,6 @@ noncoding_id <- unique(genecode_v35$transcript_id[genecode_v35$transcript_type !
 novel_id <- unique(grep("MSTRG", ccle$transcript_id, value = T))
 ccle_novel_noncoding <- ccle[ccle$transcript_id %in% c(noncoding_id, novel_id)]
 
-# export
+# export results
 setwd("/home/weihu/RBP_transcript_drug_project/data/gtf")
 export(ccle_novel_noncoding, "CCLE_1017_merged_novel_noncoding.gtf", format = "gtf")
